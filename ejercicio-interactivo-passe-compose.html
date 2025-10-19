@@ -4,77 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Exercice de Grammaire Française – Interactif</title>
-  <style>
-    :root{
-      --bg:#f6f7fb; --paper:#ffffff; --ink:#1f2937; --muted:#6b7280; --brand:#2563eb; --ok:#16a34a; --bad:#dc2626; --warn:#d97706;
-      --focus: 0 0 0 3px rgba(37,99,235,.25);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
-      color:var(--ink); background:var(--bg);
-    }
-    .container{max-width:1000px;margin:24px auto;padding:24px}
-    .card{background:var(--paper);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.06);padding:28px}
-    h1{margin:0 0 12px;font-size:28px}
-    .sub{color:var(--muted);margin:0 0 18px}
 
-    .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:12px 0 16px}
-    .left, .right{display:flex;gap:8px;align-items:center}
-    .btn{appearance:none;border:1px solid #e5e7eb;background:#fff;color:#111827;border-radius:10px;padding:10px 14px;cursor:pointer;transition:.2s;display:inline-flex;gap:8px;align-items:center}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.06)}
-    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-    .btn.success{background:var(--ok);border-color:var(--ok);color:#fff}
-    .btn.warn{background:var(--warn);border-color:var(--warn);color:#fff}
-    .btn.ghost{background:transparent;border-color:#e5e7eb}
-
-    .toggle{display:inline-flex;align-items:center;gap:10px}
-    .toggle input{accent-color:var(--brand)}
-
-    .progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}
-    .bar{height:100%;width:0;background:var(--brand);transition:width .25s ease}
-
-    .quiz{margin-top:8px}
-    .q-header{display:flex;justify-content:space-between;align-items:center;margin:6px 0 14px}
-    .q-index{font-weight:700}
-    .timer{font-variant-numeric:tabular-nums;color:var(--muted)}
-
-    fieldset{border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin:0}
-    legend{padding:0 8px;color:var(--brand);font-weight:700}
-    .q-text{font-weight:600;margin:0 0 12px}
-
-    .option{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px;margin:8px 0;cursor:pointer}
-    .option input{margin-top:2px;accent-color:var(--brand)}
-    .option.correct{border-color:var(--ok);background:rgba(22,163,74,.06)}
-    .option.incorrect{border-color:var(--bad);background:rgba(220,38,38,.06)}
-
-    .explanation{display:none;margin-top:8px;color:var(--muted);font-style:italic}
-    .explanation.show{display:block}
-
-    .nav{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
-
-    .results{display:none;margin-top:18px;padding:18px;border:1px solid #bbf7d0;background:#ecfdf5;border-radius:12px}
-    .results.show{display:block}
-
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:12px}
-
-    /* Dark mode */
-    .dark{--bg:#0b1020;--paper:#0f172a;--ink:#e5e7eb;--muted:#94a3b8;--brand:#60a5fa;--ok:#34d399;--bad:#f87171;--warn:#fbbf24}
-    .dark body{background:var(--bg);}
-    .dark .card{background:var(--paper)}
-    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;border:1px solid #cbd5e1;border-radius:6px;padding:1px 6px;background:#f8fafc;color:#0f172a}
-
-    /* Accessibility */
-    :focus-visible{outline:none;box-shadow:var(--focus)}
-  </style>
+  <!-- ✅ Estilos externos -->
+  <link rel="stylesheet" href="styles/exercice-passe-compose.css">
 </head>
 <body>
   <div class="container">
     <div class="card" role="application" aria-label="Exercice de grammaire française, passé composé">
       <h1>Exercice Interactif : Passé composé (20 questions)</h1>
-      <p class="sub">Mode <strong class="pill" id="mode-label">Pratique</strong> · Sauvegarde automatique · Raccourcis <span class="kbd">←</span>/<span class="kbd">→</span>, <span class="kbd">1..4</span>, <span class="kbd">Espace</span></p>
+      <p class="sub">
+        Mode <strong class="pill" id="mode-label">Pratique</strong> · Sauvegarde automatique · 
+        Raccourcis <span class="kbd">←</span>/<span class="kbd">→</span>, 
+        <span class="kbd">1..4</span>, <span class="kbd">Espace</span>
+      </p>
 
+      <!-- 🔸 Toolbar -->
       <div class="toolbar" aria-label="barre d'actions">
         <div class="left">
           <button class="btn ghost" id="shuffle-btn" title="Mélanger l'ordre">🔀 Mélanger</button>
@@ -95,13 +39,16 @@
         </div>
       </div>
 
+      <!-- 🔸 Question Header -->
       <div class="q-header">
         <div class="q-index" id="q-index">Question 1 / 20</div>
         <div class="timer" id="timer" aria-live="polite"></div>
       </div>
 
+      <!-- 🔸 Zone du quiz -->
       <div class="quiz" id="quiz" aria-live="polite"></div>
 
+      <!-- 🔸 Navigation -->
       <div class="nav">
         <button class="btn" id="prev">⟵ Précédent</button>
         <div style="display:flex;gap:8px">
@@ -111,236 +58,12 @@
         <button class="btn" id="next">Suivant ⟶</button>
       </div>
 
+      <!-- 🔸 Résultats -->
       <div class="results" id="results" aria-live="polite"></div>
     </div>
   </div>
 
-  <script>
-    // ---------- Données (inchangées, d'après votre version) ----------
-    const questionsData = [
-      { text:"1. Nous (se promener) dans le parc hier.", options:["nous sommes promené","nous nous sommes promenés","nous avons promené"], correct_answer:"nous nous sommes promenés", explanation:"C'est un verbe pronominal (se promener), donc il utilise l'auxiliaire 'être'. Le participe passé s'accorde avec 'nous'." },
-      { text:"2. Ils (se voir) au cinéma la semaine dernière.", options:["se sont vus","se sont vu","se sont vues"], correct_answer:"se sont vus", explanation:"Verbe pronominal. Le pronom 'se' est un COD (ils ont vu qui ? Eux-mêmes), donc le participe passé s'accorde avec 'ils'." },
-      { text:"3. Tu (se laver) les mains avant de manger.", options:["t'es lavé","tu t'es lavées","tu t'es lavé"], correct_answer:"tu t'es lavé", explanation:"Le pronom 'se' (t') est un COI (tu as lavé quoi ? Les mains), donc il n'y a pas d'accord." },
-      { text:"4. Elles (se rencontrer) à la fac.", options:["se sont rencontrées","se sont rencontré","se sont rencontrés"], correct_answer:"se sont rencontrées", explanation:"Verbe pronominal. Le pronom 'se' est un COD (elles ont rencontré qui ? Elles-mêmes), donc le participe passé s'accorde avec 'elles'." },
-      { text:"5. Je (monter) l'escalier en courant.", options:["suis monté","ai monté","suis montés"], correct_answer:"ai monté", explanation:"Le verbe 'monter' est transitif ici car il a un COD ('l'escalier'). Il se conjugue donc avec 'avoir'." },
-      { text:"6. Nous (aller) au cinéma.", options:["sommes allés","avons allés","sommes allé"], correct_answer:"sommes allés", explanation:"'Aller' est un verbe de mouvement qui utilise toujours 'être'. Le participe passé s'accorde avec 'nous'." },
-      { text:"7. Elles (grimper) sur la chaise.", options:["ont grimpé","sont grimpées","ont grimpées"], correct_answer:"sont grimpées", explanation:"Le verbe 'grimper' est intransitif ici (il n'a pas de COD), donc il utilise 'être'. Le participe passé s'accorde avec 'elles'." },
-      { text:"8. Vous (rentrer) le courrier ?", options:["êtes rentrés","avez rentré","êtes rentré"], correct_answer:"avez rentré", explanation:"Le verbe 'rentrer' est transitif ici car il a un COD ('le courrier'). Il se conjugue donc avec 'avoir'." },
-      { text:"9. Il (retourner) à la maison hier soir.", options:["a retourné","est retourné","a retourné"], correct_answer:"est retourné", explanation:"Le verbe 'retourner' est intransitif ici (il n'a pas de COD), il exprime un mouvement, donc il utilise 'être'." },
-      { text:"10. Je (passer) une semaine en France.", options:["suis passé","ai passé","suis passée"], correct_answer:"ai passé", explanation:"Le verbe 'passer' est transitif ici car il a un COD ('une semaine'). Il se conjugue donc avec 'avoir'." },
-      { text:"11. Elle (descendre) l'escalier.", options:["est descendue","a descendu","a descendue"], correct_answer:"a descendu", explanation:"Le verbe 'descendre' est transitif ici car il a un COD ('l'escalier'). Il se conjugue donc avec 'avoir'." },
-      { text:"12. Les enfants (monter) sur l'arbre.", options:["sont montés","ont montés","sont monté"], correct_answer:"sont montés", explanation:"Le verbe 'monter' est intransitif ici (il n'a pas de COD), il exprime un mouvement, donc il utilise 'être'. Le participe passé s'accorde avec 'Les enfants'." },
-      { text:"13. On (se faire) une promesse.", options:["s'est faits","s'est fait","s'est faites"], correct_answer:"s'est fait", explanation:"Le pronom 'se' (on) est un COI (on a fait quoi ? une promesse). Le participe ne s'accorde pas." },
-      { text:"14. Vous (retourner) le pantalon pour le laver.", options:["avez retourné","êtes retournés","avez retournés"], correct_answer:"avez retourné", explanation:"Le verbe 'retourner' est transitif ici, il a un COD ('le pantalon'). Il se conjugue donc avec 'avoir'." },
-      { text:"15. Le facteur (passer) hier soir.", options:["est passé","a passé","est passée"], correct_answer:"est passé", explanation:"Le verbe 'passer' est intransitif (sans COD), il exprime un mouvement. Il utilise donc 'être'." },
-      { text:"16. Elle (se souvenir) de son enfance.", options:["s'est souvenue","s'est souvenu","s'est souvenu"], correct_answer:"s'est souvenue", explanation:"Verbe pronominal qui n'a pas de COD après le verbe. Le participe s'accorde avec le sujet 'Elle'." },
-      { text:"17. Ils (grimper) la roche.", options:["ont grimpé","sont grimpés","ont grimpés"], correct_answer:"ont grimpé", explanation:"Le verbe 'grimper' est transitif ici, il a un COD ('la roche'). Il se conjugue donc avec 'avoir'." },
-      { text:"18. Tu (rentrer) du travail à 18h.", options:["as rentré","es rentré","es rentrée"], correct_answer:"es rentré", explanation:"Le verbe 'rentrer' est intransitif (sans COD), il exprime un mouvement. Il utilise donc 'être'." },
-      { text:"19. Nous (se brosser) les cheveux.", options:["nous sommes brossés","nous avons brossé","nous nous sommes brossé"], correct_answer:"nous nous sommes brossé", explanation:"Le pronom 'se' est un COI (nous avons brossé quoi ? les cheveux). Le participe ne s'accorde pas." },
-      { text:"20. Le vase (tomber) de la table.", options:["est tombé","a tombé","est tombée"], correct_answer:"est tombé", explanation:"Le verbe 'tomber' est un verbe de mouvement qui utilise toujours 'être'. Le participe passé s'accorde avec le sujet ('le vase')." }
-    ];
-
-    // ---------- État & utilitaires ----------
-    const $ = s => document.querySelector(s);
-    const quizEl = $('#quiz');
-    const progressBar = $('#progress-bar');
-    const qIndexEl = $('#q-index');
-    const resultsEl = $('#results');
-    const timerEl = $('#timer');
-
-    let state = {
-      order: [...Array(questionsData.length).keys()],
-      answers: {}, // index -> value
-      checked: {}, // index -> true/false (a été corrigé en mode instant)
-      current: 0,
-      instant: true,
-      timerOn: false,
-      dark: false,
-      endsAt: null,
-    };
-
-    // sauvegarde/restauration
-    const STORAGE_KEY = 'fr_grammar_quiz_v2';
-    const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    const load = () => {
-      try{
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if(!raw) return;
-        const incoming = JSON.parse(raw);
-        // ne restaure que les clés attendues
-        state = { ...state, ...incoming };
-      }catch{ /* noop */ }
-    };
-
-    load();
-
-    // minuscule util pour mélanger
-    function shuffle(arr){
-      for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
-      return arr;
-    }
-
-    function currentQ(){
-      const idx = state.order[state.current];
-      return { idx, q: questionsData[idx] };
-    }
-
-    function updateProgress(){
-      const answered = Object.keys(state.answers).length;
-      const pct = Math.round((answered/questionsData.length)*100);
-      progressBar.style.width = pct+"%";
-      qIndexEl.textContent = `Question ${state.current+1} / ${questionsData.length}`;
-    }
-
-    function renderQuestion(){
-      const { idx, q } = currentQ();
-      const selected = state.answers[idx] ?? null;
-
-      const options = q.options.map((opt,i)=>{
-        const id = `q${idx}_opt${i}`;
-        const isCorrect = opt === q.correct_answer;
-        const wasChecked = state.checked[idx];
-        let optClass = 'option';
-        if(wasChecked && selected){
-          if(selected === opt){ optClass += isCorrect ? ' correct' : ' incorrect'; }
-          else if(isCorrect){ optClass += ' correct'; }
-        }
-        return `<label class="${optClass}" for="${id}"><input type="radio" id="${id}" name="q${idx}" value="${opt}" ${selected===opt?'checked':''}/> <span>${opt}</span></label>`
-      }).join('');
-
-      quizEl.innerHTML = `
-        <fieldset>
-          <legend>Choisissez la bonne forme</legend>
-          <p class="q-text">${q.text}</p>
-          <div class="options">${options}</div>
-          <button class="btn ghost" id="show-expl">💡 Voir l'explication</button>
-          <p class="explanation" id="expl">Réponse correcte : <strong>${q.correct_answer}</strong>. ${q.explanation}</p>
-        </fieldset>
-      `;
-
-      $('#show-expl').addEventListener('click',()=>{
-        $('#expl').classList.toggle('show');
-      });
-
-      quizEl.querySelectorAll('input[type="radio"]').forEach(input=>{
-        input.addEventListener('change', (e)=>{
-          state.answers[idx] = e.target.value;
-          if(state.instant){
-            state.checked[idx] = true;
-            // forcer un re-render pour afficher couleurs
-            renderQuestion();
-          }
-          updateProgress();
-          save();
-        });
-      });
-
-      updateProgress();
-    }
-
-    function scoreAll(){
-      let score = 0; let lines = [];
-      state.order.forEach((orderPos)=>{
-        const q = questionsData[orderPos];
-        const user = state.answers[orderPos];
-        const ok = user === q.correct_answer;
-        if(ok) score++;
-        lines.push(`<div class="result-item"><p><strong>${q.text}</strong></p><p class="${ok?'ok':'bad'}">${ok?'✅ Correct !':'❌ Incorrect !'} Votre réponse : <em>${user??'non répondu'}</em></p><p class="explanation show">Réponse correcte : <strong>${q.correct_answer}</strong>. ${q.explanation}</p></div>`);
-      });
-      const pct = Math.round((score/questionsData.length)*100);
-      resultsEl.innerHTML = `<h2>Votre score : ${score} / ${questionsData.length} (${pct}%)</h2>` + lines.join('');
-      resultsEl.classList.add('show');
-    }
-
-    // ---------- Navigation ----------
-    function next(){ if(state.current < questionsData.length-1){ state.current++; renderQuestion(); save(); } }
-    function prev(){ if(state.current > 0){ state.current--; renderQuestion(); save(); } }
-
-    // ---------- Minuteur ----------
-    let timerTick = null;
-    function startTimer(minutes=10){
-      const now = Date.now();
-      state.endsAt = now + minutes*60*1000; save();
-      if(timerTick) clearInterval(timerTick);
-      timerTick = setInterval(()=>{
-        const remain = Math.max(0, state.endsAt - Date.now());
-        const m = String(Math.floor(remain/60000)).padStart(2,'0');
-        const s = String(Math.floor((remain%60000)/1000)).padStart(2,'0');
-        timerEl.textContent = `⏱️ ${m}:${s}`;
-        if(remain<=0){
-          clearInterval(timerTick);
-          timerEl.textContent = '⏱️ 00:00';
-          scoreAll();
-          document.getElementById('submit').disabled = true;
-        }
-      }, 250);
-    }
-    function stopTimer(){ if(timerTick) clearInterval(timerTick); timerEl.textContent = ''; state.endsAt=null; save(); }
-    if(state.endsAt){ // reprendre un ancien minuteur
-      const remain = state.endsAt - Date.now();
-      if(remain>0){ startTimer(Math.ceil(remain/60000)); } else { state.endsAt=null; save(); }
-    }
-
-    // ---------- Raccourcis clavier ----------
-    window.addEventListener('keydown', (e)=>{
-      if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
-      if(e.key==='ArrowRight'){ next(); }
-      if(e.key==='ArrowLeft'){ prev(); }
-      if(e.key===' '){ e.preventDefault(); const btn=$('#show-expl'); if(btn) btn.click(); }
-      const n = parseInt(e.key,10);
-      if(n>=1 && n<=4){
-        const radios = quizEl.querySelectorAll('input[type="radio"]');
-        if(radios[n-1]){ radios[n-1].click(); }
-      }
-    });
-
-    // ---------- Actions UI ----------
-    document.getElementById('next').addEventListener('click', next);
-    document.getElementById('prev').addEventListener('click', prev);
-
-    document.getElementById('submit').addEventListener('click', ()=>{
-      state.checked = Object.fromEntries(Object.keys(questionsData).map(k=>[k,true]));
-      scoreAll(); save();
-    });
-
-    document.getElementById('reset').addEventListener('click', ()=>{
-      if(!confirm('Tout réinitialiser ?')) return;
-      state.answers={}; state.checked={}; state.current=0; resultsEl.classList.remove('show'); resultsEl.innerHTML=''; updateProgress(); save(); renderQuestion();
-    });
-
-    document.getElementById('shuffle-btn').addEventListener('click', ()=>{
-      state.order = shuffle(state.order);
-      state.current = 0; save(); renderQuestion();
-    });
-
-    const instantToggle = document.getElementById('instant-toggle');
-    const modeLabel = document.getElementById('mode-label');
-    instantToggle.checked = !!state.instant;
-    instantToggle.addEventListener('change', (e)=>{
-      state.instant = e.target.checked; save();
-      modeLabel.textContent = state.instant ? 'Pratique' : 'Examen';
-    });
-
-    const timerToggle = document.getElementById('timer-toggle');
-    timerToggle.checked = !!state.endsAt; // actif si minuteur en cours
-    timerToggle.addEventListener('change', (e)=>{
-      state.timerOn = e.target.checked; save();
-      if(e.target.checked){ startTimer(10); } else { stopTimer(); }
-    });
-
-    const darkToggle = document.getElementById('dark-toggle');
-    if(state.dark) document.documentElement.classList.add('dark');
-    darkToggle.checked = state.dark;
-    darkToggle.addEventListener('change', (e)=>{
-      state.dark = e.target.checked; save();
-      document.documentElement.classList.toggle('dark', state.dark);
-    });
-
-    // ---------- Initialisation ----------
-    // s'il n'y a rien, garder l'ordre 0..n; sinon utiliser l'ordre sauvegardé
-    if(!state.order || state.order.length !== questionsData.length){ state.order = [...Array(questionsData.length).keys()]; }
-    renderQuestion();
-    updateProgress();
-  </script>
+  <!-- ✅ Scripts externos -->
+  <script src="scripts/exercice-passe-compose.js"></script>
 </body>
 </html>
